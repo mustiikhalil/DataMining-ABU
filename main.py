@@ -1,3 +1,7 @@
+"""
+    Contributors:
+    Mustii 
+"""
 import Auth as AuthKeys
 import tweepy
 from database import Database
