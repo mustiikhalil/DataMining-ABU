@@ -22,4 +22,4 @@ print(user)
 public_tweets = api.home_timeline()
 
 for status in tweepy.Cursor(api.user_timeline, id='twitter').items(3000):
-    print(status)
+    print(status._json)
