@@ -6,7 +6,7 @@
     "coordinates": "None",
     "retweet_cont": 166,
     "hashtags": [],
-    "ser": {
+    "user": {
                 "location": "",
                 "screen_name": "Spotify",
                 "lang": "en",
@@ -16,8 +16,5 @@
                 "created_at": "Fri Nov 07 12:14:28 +0000 2008"
             },
     "geo": "None",
-    "in_reply_to_ser_id_str": "None",
-    "created_at": "Sat Apr 28 13:00:20 +0000 2018",
-    "in_reply_to_stats_id_str": "None",
-    "place": "None"
+    "created_at": "Sat Apr 28 13:00:20 +0000 2018"
 }
