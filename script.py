@@ -25,9 +25,11 @@ import Auth as auth
 import collectTweets as CT 
 import collectUsers as CU 
 
-plotly.tools.set_credentials_file(username= auth.plotyUsername, api_key=auth.plotyAPIKey)
-file = reader("Collecting","users.csv")
-timestamp, count = getTimestamp(file)
+# CU.createUsers("welcome.xlsx")
+# convert_to_csv("welcome.xlsx",sheetnumber="1",csvfilename="wl.csv")
+# plotly.tools.set_credentials_file(username= auth.plotyUsername, api_key=auth.plotyAPIKey)
+# file = reader("Collecting","users.csv")
+# timestamp, count = getTimestamp(file)
 # print(Emotions.getEmotions(arrayOfEmotions=["send the tweets over here"])) # takes an array of emotions
 
 
