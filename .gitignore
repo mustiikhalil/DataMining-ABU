@@ -3,3 +3,5 @@ Auth.pyc
 database.pyc
 .idea
 __pycache__
+start.py
+./start.py

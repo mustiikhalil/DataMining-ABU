@@ -1,41 +1,34 @@
-"""
-    Contributors:
-    Carlos
-    Mustii 
+import csv
+import plotly
+import plotly.plotly as py
+from plotly.graph_objs import *
+import numpy as np
 
-"""
-import Auth as AuthKeys
-import tweepy
-import json
-import xlwt
-import json
-import ast
-from time import mktime
+def reader():
+    timestamp = []
+    count = 0
+    with open('users.csv', 'rb') as f:
+        reader = csv.reader(f)
+        for row in reader: 
+            timestamp.append(row[3])
+            count += 1
+    return timestamp,count
 
-book = xlwt.Workbook()
-sh = book.add_sheet("1")
-auth = tweepy.OAuthHandler(AuthKeys.consumer_key, AuthKeys.consumer_secret)
-auth.set_access_token(AuthKeys.access_token, AuthKeys.access_token_secret)
-api = tweepy.API(auth)
-public_tweets = api.home_timeline()
-sh.write(0,0,"Account")
-sh.write(0,1,"Date")
-sh.write(0,2,"name")
-sh.write(0,3,"timestamp")
-count = 1
-id = api.get_user("Spotify")
 
-for status in tweepy.Cursor(api.followers, id = id.id, count = 50).items():
-    date = str(status.created_at)
-    timestamp = mktime(status.created_at.timetuple())
-    sh.write(count,2,status.name)
-    sh.write(count,0,status.screen_name)
-    sh.write(count,1,date)
-    sh.write(count,3,timestamp)
-        
-    if count == 5:
-        break 
-    count += 1
-    
+def TimestampVis(count,timestamp):
+    x = np.linspace(0,1,count)
 
-book.save('simple.xls')
+    trace0 = Scatter(
+        x=x,
+        y=sorted(
+            timestamp
+        )
+    )
+
+    # plots a line 
+    data = Data([trace0])
+    py.plot(data, filename = 'basic-line')
+
+    # histogram of data
+    Histo = [Histogram(x=timestamp)]
+    py.plot(Histo, filename='basic histogram')
