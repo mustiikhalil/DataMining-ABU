@@ -1,7 +1,13 @@
 Auth.py
 Auth.pyc
+functions.pyc
 database.pyc
 .idea
 __pycache__
 start.py
 ./start.py
+fileopener.pyc
+visualizing.pyc
+emotions.pyc
+collectTweets.pyc
+collectUsers.pyc

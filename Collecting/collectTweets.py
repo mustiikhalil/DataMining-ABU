@@ -6,10 +6,7 @@
 """
 import Auth as AuthKeys
 import tweepy
-import json
 import xlwt
-import json
-import ast
 from time import mktime
 
 book = xlwt.Workbook()
