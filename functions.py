@@ -4,14 +4,19 @@ import plotly.plotly as py
 from plotly.graph_objs import *
 import numpy as np
 
+
 def reader():
-    timestamp = []
-    count = 0
     with open('users.csv', 'rb') as f:
         reader = csv.reader(f)
-        for row in reader: 
-            timestamp.append(row[3])
-            count += 1
+    return reader
+
+
+def getTimestamp(reader):
+    timestamp = []
+    count = 0
+    for row in reader: 
+        timestamp.append(row[3])
+        count += 1
     return timestamp,count
 
 
