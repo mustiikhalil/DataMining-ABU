@@ -22,7 +22,7 @@ def createTweetsFile(filename,users,wait,batch_of_tweets):
                     if detect(tweet.text) == "en" and len(tweet.text) > 100:
                         date = str(tweet.created_at)
                         timestamp = mktime(tweet.created_at.timetuple())
-                        book = book.append({'ID': tweet.id,'Tweet':tweet.text,'Timestamp':timestamp,"date":date}, ignore_index=True)
+                        book = book.append({'ID': tweet.id,'Tweet': " ".join(tweet.text.split()),'Timestamp':timestamp,"date":date}, ignore_index=True)
                         counter += 1
                 except:
                     print("not in language")
