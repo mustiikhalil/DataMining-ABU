@@ -33,30 +33,41 @@ numberOfUsers = 1400
 sample_user_data = 1
 user_filename = "users.csv"
 tweet_filename = "tweets.csv"
+emotion_file = "emotions.csv"
 wait = True
 batch_Emotion = 4
 ###
 # NOTE: 
 ##
 
-checkIfSaved = CU.createUsers(user_filename,numberOfRetrivels=numberOfUsers,wait=wait,batch_of_users=batch_of_users) # this line creates the users excel file
+# checkIfSaved = CU.createUsers(user_filename,numberOfRetrivels=numberOfUsers,wait=wait,batch_of_users=batch_of_users) # this line creates the users excel file
 
-if not checkIfSaved:
-    raise "couldn't save to file"
+# if not checkIfSaved:
+#     raise "couldn't save to file"
 
-## READS THE USERS.CSV
+# ## READS THE USERS.CSV
 file_users = reader(path,user_filename) # opens the file and reads the csv
 users,user_timestamp,count = getUsers(file_users) # gets the users and their counts
-users = [users[random.randrange(len(users))] for item in range(sample_user_data)] # samples randomly the users
+# users = [users[random.randrange(len(users))] for item in range(sample_user_data)] # samples randomly the users
 
 ##
 # ## Create tweets
 ##
 
-CT.createTweetsFile(tweet_filename,users,wait=wait,batch_of_tweets=batch_of_tweets) # creates the tweets files
+# CT.createTweetsFile(tweet_filename,users,wait=wait,batch_of_tweets=batch_of_tweets) # creates the tweets files
 
-file_tweets = reader(path,tweet_filename)
-tweets, tweet_timestamp, ids, count = getTweets(file_tweets)
+# file_tweets = reader(path,tweet_filename)
+# tweets, tweet_timestamp, ids, count = getTweets(file_tweets)
 
-Emotions.detect(tweets,tweet_timestamp,ids,batch_Emotion,"emotions.csv")
+# Emotions.detect(tweets,tweet_timestamp,ids,batch_Emotion,"emotions.csv")
 
+file_emotions = reader(path,emotion_file)
+ID, timestamp, anger, joy, sadness, fear, surprise, count = getEmotions(file_emotions)
+
+# TimestampVis(len(user_timestamp),user_timestamp)
+# plot(timestamp,anger,'anger','anger-his')
+# plot(timestamp,joy,'joy','joy-his')
+# plot(timestamp,sadness,'sadness','sadness-his')
+# plot(timestamp,fear,'fear','fear-his')
+# plot(timestamp,surprise,'surprise','surprise-his')
+fullplot(timestamp,anger,joy,sadness,fear,surprise)

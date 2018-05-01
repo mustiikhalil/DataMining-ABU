@@ -18,6 +18,7 @@ def getUsers(reader):
         count += 1
     return users[1:],timestamp[1:], count
 
+
 def getTweets(reader):
     tweets = []
     timestamp = []
@@ -29,6 +30,27 @@ def getTweets(reader):
         ids.append(row[0])
         count += 1
     return tweets[1:],timestamp[1:],ids[1:], count
+
+
+def getEmotions(reader):
+    ID = []
+    timestamp = []
+    anger = []
+    joy = []
+    sadness = []
+    fear = []
+    surprise = []
+    count = 0
+    for row in reader: 
+        ID.append(row[0])
+        timestamp.append(row[1])
+        anger.append(row[2])
+        joy.append(row[3])
+        sadness.append(row[4])
+        fear.append(row[5])
+        surprise.append(row[6])
+        count += 1
+    return ID[1:], timestamp[1:], anger[1:], joy[1:], sadness[1:], fear[1:], surprise[1:], count
 
 
 
