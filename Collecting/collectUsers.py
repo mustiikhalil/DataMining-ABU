@@ -1,32 +1,34 @@
 import Auth as AuthKeys
 import tweepy
-import xlwt
+import pandas as pd
 from time import mktime
 
-def createUsers(xlxfilename): 
-    book = xlwt.Workbook()
-    sh = book.add_sheet("1")
+def createUsers(filename,numberOfRetrivels,wait,batch_of_users): 
+    if numberOfRetrivels == 0:
+        return 0
+    
+    book = pd.DataFrame(columns=['Account','Name','Date','timestamp'])
     auth = tweepy.OAuthHandler(AuthKeys.consumer_key, AuthKeys.consumer_secret)
     auth.set_access_token(AuthKeys.access_token, AuthKeys.access_token_secret)
-    api = tweepy.API(auth) #, wait_on_rate_limit=True)
-    sh.write(0,0,"Account")
-    sh.write(0,1,"Date")
-    sh.write(0,2,"name")
-    sh.write(0,3,"timestamp")
+    api = tweepy.API(auth, wait_on_rate_limit=wait)
     count = 1
     id = api.get_user("Spotify")
     try:
-        for followers in tweepy.Cursor(api.followers, id = id.id, count = 200).items():
-            date = str(followers.created_at)
-            timestamp = mktime(followers.created_at.timetuple())
-            sh.write(count,2,followers.name)
-            sh.write(count,0,followers.screen_name)
-            sh.write(count,1,date)
-            sh.write(count,3,timestamp)
-            count += 1
+        while numberOfRetrivels > 0:
+            for followers in tweepy.Cursor(api.followers, id = id.id, count = batch_of_users).items():
+                date = str(followers.created_at)
+                timestamp = mktime(followers.created_at.timetuple())
+                book = book.append({'Account': followers.screen_name,'Name':followers.name,'Date':date,"timestamp":timestamp}, ignore_index=True)
+                count += 1
+            numberOfRetrivels -= 1
 
     except tweepy.TweepError, e:
         print "TweepError raised, ignoring and continuing."
         print e
+        return True
 
-    book.save(xlxfilename)
+    book.to_csv(filename, encoding='utf-8', index=False)
+    return False
+
+
+   

@@ -1,8 +1,9 @@
 import pandas
 import csv
 
+
 def reader(path,filename):
-    f = open(path +'/'+ filename, 'r')
+    f = open(path + filename, 'r')
     reader = csv.reader(f)
     return reader
 
@@ -15,6 +16,14 @@ def getTimestamp(reader):
         count += 1
     return timestamp,count
 
+
+def getUsers(reader):
+    users = []
+    count = 0
+    for row in reader: 
+        users.append(row[0])
+        count += 1
+    return users,count
 
 def convert_to_csv(xlsxfilename,csvfilename,sheetnumber):
     data_xls = pandas.read_excel(xlsxfilename, sheetnumber, index_col=None)
