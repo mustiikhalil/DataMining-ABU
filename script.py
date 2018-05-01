@@ -26,10 +26,10 @@ import collectTweets as CT
 import collectUsers as CU 
 
 batch_of_tweets = 1
-batch_of_users = 1
+batch_of_users = 10
 path = ""
 numberOfUsers = 1
-sample_user_data = 15
+sample_user_data = 1
 user_filename = "users.csv"
 tweet_filename = "tweets.csv"
 wait = False
@@ -39,7 +39,7 @@ wait = False
 
 checkIfSaved = CU.createUsers(user_filename,numberOfRetrivels=numberOfUsers,wait=wait,batch_of_users=batch_of_users) # this line creates the users excel file
 
-if checkIfSaved:
+if not checkIfSaved:
     raise "couldn't save to file"
 
 file_users = reader(path,user_filename) # opens the file and reads the csv
