@@ -28,11 +28,17 @@ def createTweetsFile(filename,users,wait,batch_of_tweets):
                     print("not in language")
 
     except tweepy.TweepError, e:
-        book.to_csv(filename, encoding='utf-8', index=False)
         print "TweepError raised, ignoring and continuing."
         print e
 
+        if not book.empty:
+            book.to_csv(filename, encoding='utf-8', index=False)
+            return True
+        else:
+            return False
+
     book.to_csv(filename, encoding='utf-8', index=False)
+    return True
 
 
 def test():
