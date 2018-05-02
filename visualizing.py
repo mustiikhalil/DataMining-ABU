@@ -26,7 +26,8 @@ def plot(point,data,filename,Histogram_name):
 
     trace0 = Scatter(
         x=point,
-        y=data
+        y=data,
+        name=filename
     )
 
     # plots a line 

@@ -32,11 +32,11 @@ batch_of_users = 200 # number of users per request
 path = "" # path of data
 numberOfUsers = 3000 # number of users needed
 sample_user_data = 30  # number of random users picked to get the tweets
-user_filename = "users_3.csv"
-sort_user_filename = "users_3_sorted.csv"
-tweet_filename = "tweets_3.csv"
-sort_tweet_filename = 'tweets_3_sorted.csv'
-emotion_file = "emotions_3.csv"
+user_filename = "users_new.csv"
+sort_user_filename = "users_new_sorted.csv"
+tweet_filename = "tweets_new.csv"
+sort_tweet_filename = 'tweets_new_sorted.csv'
+emotion_file = "emotions_new.csv"
 
 wait = False
 batch_Emotion = 4
@@ -44,26 +44,26 @@ batch_Emotion = 4
 # NOTE: 
 ##
 
-# checkIfSaved = CU.createUsers(user,user_filename,numberOfRetrivels=numberOfUsers,wait=wait,batch_of_users=batch_of_users) # this line creates the users excel file
+checkIfSaved = CU.createUsers(user,user_filename,numberOfRetrivels=numberOfUsers,wait=wait,batch_of_users=batch_of_users) # this line creates the users excel file
 
-# if not checkIfSaved:
-#     raise "couldn't save to file"
+if not checkIfSaved:
+    raise "couldn't save to file"
 
-# # ## READS THE USERS.CSV
+# ## READS THE USERS.CSV
 
 reader_sort(user_filename,"timestamp")
 file_users = reader(path,sort_user_filename) # opens the file and reads the csv
 users,user_timestamp,count = getUsers(file_users) # gets the users and their counts
-# users = [users[random.randrange(len(users))] for item in range(sample_user_data)] # samples randomly the users
+users = [users[random.randrange(len(users))] for item in range(sample_user_data)] # samples randomly the users
 
-##
+# #
 # ## Create tweets
-##
+# #
 
-# checkIfSaved = CT.createTweetsFile(tweet_filename,users,wait=wait,batch_of_tweets=batch_of_tweets) # creates the tweets files
+checkIfSaved = CT.createTweetsFile(tweet_filename,users,wait=wait,batch_of_tweets=batch_of_tweets) # creates the tweets files
 
-# if not checkIfSaved:
-#     raise "couldn't save to file"
+if not checkIfSaved:
+    raise "couldn't save to file"
 
 reader_sort(tweet_filename,'ID')
 
