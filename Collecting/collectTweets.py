@@ -14,9 +14,10 @@ def createTweetsFile(filename,users,wait,batch_of_tweets):
     auth.set_access_token(AuthKeys.access_token, AuthKeys.access_token_secret)
     api = tweepy.API(auth, wait_on_rate_limit=wait)
     counter = 1
-    try:
-        while empty(users):
-            id = api.get_user(users.pop())
+    
+    while empty(users):
+        id = api.get_user(users.pop())
+        try:
             for tweet in tweepy.Cursor(api.user_timeline, id = id.id, count = batch_of_tweets).items():
                 try:
                     if detect(tweet.text) == "en" and len(tweet.text) > 100:
@@ -27,18 +28,15 @@ def createTweetsFile(filename,users,wait,batch_of_tweets):
                 except:
                     print("not in language")
 
-    except tweepy.TweepError, e:
-        print "TweepError raised, ignoring and continuing."
-        print e
+        except tweepy.TweepError, e:
+            print "TweepError raised, ignoring and continuing."
+            print e
 
-        if not book.empty:
-            book.to_csv(filename, encoding='utf-8', index=False)
-            return True
-        else:
-            return False
-
-    book.to_csv(filename, encoding='utf-8', index=False)
-    return True
+    if not book.empty:
+        book.to_csv(filename, encoding='utf-8', index=False)
+        return True
+    else:
+        return False
 
 
 def test():

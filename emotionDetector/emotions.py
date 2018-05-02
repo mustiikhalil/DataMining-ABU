@@ -9,8 +9,8 @@ def getEmotions(arrayOfEmotions):
     return indicoio.emotion(arrayOfEmotions)
 
 
-def detect(tweets,tweet_timestamp,ids,batch_Emotion,filename):
-    book = pd.DataFrame(columns=['ID','timestamp','anger','joy','sadness','fear','surprise','time_of_day'])
+def detect(tweets, tweet_timestamp, date, ids, batch_Emotion, filename):
+    book = pd.DataFrame(columns=['ID','timestamp',"date",'anger','joy','sadness','fear','surprise','time_of_day'])
     End_str = ['Night', 'Morning','Afternoon','Evening']
     get_Batch_Data = len(tweets)
     start = 0
@@ -19,6 +19,7 @@ def detect(tweets,tweet_timestamp,ids,batch_Emotion,filename):
     for i in range(0,batch_Emotion):
         if end > len(tweets):
             break
+        to_predict_date = date[start:end]
         to_predict_id = ids[start:end]
         to_predict_timestamp = tweet_timestamp[start:end]
         to_predict = tweets[start:end]
@@ -35,7 +36,7 @@ def detect(tweets,tweet_timestamp,ids,batch_Emotion,filename):
                 timing = End_str[2]
             elif 19 <= hour < 24:
                 timing = End_str[3]
-            book = book.append({'ID': to_predict_id[i],'timestamp': to_predict_timestamp[i],
+            book = book.append({'ID': to_predict_id[i],'timestamp': to_predict_timestamp[i], 'date': to_predict_date[i],
                                 'anger':emotions[i]['anger'],'joy':emotions[i]['joy'],'sadness':emotions[i]['sadness'],
                                 'fear':emotions[i]['fear'],'surprise':emotions[i]['surprise'],'time_of_day':timing}, ignore_index=True)
         start += diff

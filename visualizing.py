@@ -34,7 +34,7 @@ def plot(point,data,filename,Histogram_name):
     py.plot(data, filename = filename)
 
     # histogram of data
-    Histo = [Histogram(x=data)]
+    Histo = [Histogram(x=point)]
     py.plot(Histo, filename=Histogram_name)
 
 

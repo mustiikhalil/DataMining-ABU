@@ -3,7 +3,7 @@ import tweepy
 import pandas as pd
 from time import mktime
 
-def createUsers(filename,numberOfRetrivels,wait,batch_of_users): 
+def createUsers(user,filename,numberOfRetrivels,wait,batch_of_users): 
     if numberOfRetrivels == 0:
         return 0
     
@@ -11,8 +11,8 @@ def createUsers(filename,numberOfRetrivels,wait,batch_of_users):
     auth = tweepy.OAuthHandler(AuthKeys.consumer_key, AuthKeys.consumer_secret)
     auth.set_access_token(AuthKeys.access_token, AuthKeys.access_token_secret)
     api = tweepy.API(auth, wait_on_rate_limit=wait)
-    id = api.get_user("Spotify")
-    
+    id = api.get_user(user)
+
     try:
         for followers in tweepy.Cursor(api.followers, id = id.id, count = batch_of_users).items():
             date = str(followers.created_at)
@@ -31,6 +31,7 @@ def createUsers(filename,numberOfRetrivels,wait,batch_of_users):
             return True
         else:
             return False
+            
     book.to_csv(filename, encoding='utf-8', index=False)
     return True
 
