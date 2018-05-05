@@ -71,3 +71,25 @@ def fullplot(timestamp,anger,joy,sadness,fear,surprise):
     # histogram of data
     Histo = [Histogram(x=anger),Histogram(x=joy),Histogram(x=sadness),Histogram(x=fear),Histogram(x=surprise)]
     py.plot(Histo, filename='full histogram')
+
+
+def printNumberOfTimesInTweets(timeOfDay):
+    countNight = 0
+    countAfternoon = 0
+    countMorning = 0
+    countEvening = 0
+    print len(timeOfDay)
+    for time in timeOfDay:
+        if time == "Night":
+            countNight += 1
+        elif time == 'Afternoon':
+            countAfternoon += 1
+        elif time == 'Morning':
+            countMorning += 1
+        else:
+            countEvening += 1
+
+    print 'Night',countNight
+    print 'Afternoon',countAfternoon
+    print 'Morning',countMorning
+    print 'Evening',countEvening

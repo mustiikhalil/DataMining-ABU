@@ -29,14 +29,14 @@ import collectUsers as CU
 user = "cnn" # the pool of users to target
 batch_of_tweets = 200 # number tweets per request
 batch_of_users = 200 # number of users per request
-path = "" # path of data
+path = "data/" # path of data
 numberOfUsers = 3000 # number of users needed
 sample_user_data = 30  # number of random users picked to get the tweets
 user_filename = "users_new.csv"
 sort_user_filename = "users_new_sorted.csv"
 tweet_filename = "tweets_new.csv"
 sort_tweet_filename = 'tweets_new_sorted.csv'
-emotion_file = "emotions_new.csv"
+emotion_file = "emotions_complete.csv"
 
 wait = False
 batch_Emotion = 4
@@ -57,8 +57,8 @@ users,user_timestamp,count = getUsers(file_users) # gets the users and their cou
 users = [users[random.randrange(len(users))] for item in range(sample_user_data)] # samples randomly the users
 
 # #
-# ## Create tweets
-# #
+## Create tweets
+#
 
 checkIfSaved = CT.createTweetsFile(tweet_filename,users,wait=wait,batch_of_tweets=batch_of_tweets) # creates the tweets files
 
@@ -73,8 +73,9 @@ tweets, tweet_timestamp, ids, tweet_date, count = getTweets(file_tweets)
 Emotions.detect(tweets,tweet_timestamp,tweet_date,ids,batch_Emotion,emotion_file)
 
 file_emotions = reader(path,emotion_file)
-ID, timestamp, date, anger, joy, sadness, fear, surprise, count = getEmotions(file_emotions)
+ID, timestamp, date, anger, joy, sadness, fear, surprise,timeOfDay, count = getEmotions(file_emotions)
 
+printNumberOfTimesInTweets(timeOfDay)
 TimestampVis(len(user_timestamp),user_timestamp)
 plot(date,anger,'anger','anger-his')
 plot(date,joy,'joy','joy-his')

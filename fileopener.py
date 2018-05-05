@@ -43,6 +43,7 @@ def getEmotions(reader):
     sadness = []
     fear = []
     surprise = []
+    timeOfDay = []
     count = 0
     for row in reader: 
         ID.append(row[0])
@@ -53,8 +54,9 @@ def getEmotions(reader):
         sadness.append(row[5])
         fear.append(row[6])
         surprise.append(row[7])
+        timeOfDay.append(row[8])
         count += 1
-    return ID[1:], timestamp[1:],date[1:] , anger[1:], joy[1:], sadness[1:], fear[1:], surprise[1:], count
+    return ID[1:], timestamp[1:],date[1:] , anger[1:], joy[1:], sadness[1:], fear[1:], surprise[1:],timeOfDay[1:], count
 
 
 def reader_sort(filename,sortby):
